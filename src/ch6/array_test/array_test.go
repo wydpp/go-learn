@@ -4,6 +4,8 @@ import "testing"
 
 func TestArrayInit(t *testing.T) {
 	var arr [3]int
+	arr[0] = 100
+	t.Log(arr)
 	arr1 := [4]int{1, 2, 3, 4}
 	arr3 := [...]int{1, 2, 3, 4, 5}
 	arr1[1] = 5

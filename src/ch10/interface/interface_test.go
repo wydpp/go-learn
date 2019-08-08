@@ -17,12 +17,11 @@ type GoProgrammer struct {
 
 //方法实现
 func (p *GoProgrammer) WriteHelloWorld() string {
-	return "fmt.Println(\"Hello World!\")"
+	return "Hello World!"
 }
 
 func TestInterface(t *testing.T) {
 	var p Programmer
 	p = new(GoProgrammer)
 	t.Log(p.WriteHelloWorld())
-
 }

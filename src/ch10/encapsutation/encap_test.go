@@ -40,7 +40,7 @@ func (e *Employee) Stringp() string {
 func TestFuncMethod(t *testing.T) {
 	e := Employee{"0", "Bob", 20}
 	fmt.Printf("Address is %x\n", unsafe.Pointer(&e.Name))
-	t.Log(e.String())
+	//t.Log(e.String())
 	//stringp打印的name地址和e对象的相同
 	t.Log(e.Stringp())
 }

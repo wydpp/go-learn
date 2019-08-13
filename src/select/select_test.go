@@ -1,4 +1,4 @@
-package groutine
+package _select
 
 import (
 	"fmt"
@@ -6,24 +6,10 @@ import (
 	"time"
 )
 
-//CSP vs Actor
-
 func service() string {
-	time.Sleep(time.Millisecond * 500)
+	time.Sleep(time.Millisecond * 800)
 	return "Done"
 }
-
-func otherTask() {
-	fmt.Println("working on something else")
-	time.Sleep(time.Millisecond * 1000)
-	fmt.Println("Other task is done.")
-}
-
-func TestCsp(t *testing.T) {
-	fmt.Println(service())
-	otherTask()
-}
-
 func asyncService() chan string {
 	//retCh := make(chan string)
 	retCh := make(chan string, 1)
@@ -36,8 +22,14 @@ func asyncService() chan string {
 	return retCh
 }
 
+/**
+超过一定时间返回错误，类似java timeout
+*/
 func TestAsyncService(t *testing.T) {
-	retCh := asyncService()
-	otherTask()
-	fmt.Println(<-retCh)
+	select {
+	case ret := <-asyncService():
+		t.Log(ret)
+	case <-time.After(time.Millisecond * 500):
+		t.Error("time out")
+	}
 }
